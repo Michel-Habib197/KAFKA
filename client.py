@@ -15,14 +15,15 @@ def read_config():
 def produce(topic, config):
   # creates a new producer instance
   producer = Producer(config)
-
-  # produces a sample message
-  key = "key"
-  value = "value"
-  producer.produce(topic, key=key, value=value)
-  print(f"Produced message to topic {topic}: key = {key:12} value = {value:12}")
-
-  # send any outstanding or buffered messages to the Kafka broker
+  user_ids = ['psilva', 'smanoel', 'jpires', 'jbernardo', 'hmoraes', 'fmilagres']
+  products = ['Camisa do PSG', 'Rádio Relógio', 'Bermuda Praia', 'Mouse', 'Teclado']
+  count = 0
+  for i in range(0,5):
+    user_id = user_ids[i]
+    product = products[i]
+    producer.produce(topic, product, user_id)
+    count += 1
+    
   producer.flush()
 
 def consume(topic, config):
